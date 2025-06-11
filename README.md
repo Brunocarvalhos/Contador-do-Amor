@@ -1,2 +1,2 @@
 # Contador-do-Amor
-Aqui consta o tempo que compartilhamos juntos!
+Desde o dia mais especial de nossas vidas!
