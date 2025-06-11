@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Nosso Amor</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #fce4ec;
+      color: #880e4f;
+    }
+    h1 {
+      font-size: 2em;
+    }
+    .contador {
+      font-size: 3em;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aqui consta o tempo que compartilhamos juntos! 💖</h1>
+  <div class="contador" id="contador">Carregando...</div>
+
+  <script>
+    const dataConhecimento = new Date("2021-01-15T00:00:00"); // 🛠️ TROQUE AQUI PELA SUA DATA!
+
+    function atualizarContador() {
+      const agora = new Date();
+      const diferenca = agora - dataConhecimento;
+      const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+      const horas = agora.getHours().toString().padStart(2, '0');
+      const minutos = agora.getMinutes().toString().padStart(2, '0');
+      const segundos = agora.getSeconds().toString().padStart(2, '0');
+      document.getElementById("contador").textContent = `${dias} dias, ${horas}:${minutos}:${segundos}`;
+    }
+
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+  </script>
+</body>
+</html>
