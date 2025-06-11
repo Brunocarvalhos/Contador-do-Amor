@@ -15,30 +15,21 @@
       font-size: 2em;
     }
     .contador {
-      font-size: 3em;
-      margin-top: 20px;
+      font-size: 1.8em;
+      margin-top: 30px;
+      white-space: pre-line;
     }
   </style>
 </head>
 <body>
-  <h1>Desde o dia mais especial de nossas vidas! Eu te amo Juliane!!! 💖</h1>
+  <h1>Desde o dia mais especial de nossas vidas, o dia que te conheci! Eu te amo Juliane!!! 💖</h1>
   <div class="contador" id="contador">Carregando...</div>
 
   <script>
-    const dataConhecimento = new Date("2016-03-19T19:00:00"); // 🛠️ TROQUE AQUI PELA SUA DATA!
+    const dataConhecimento = new Date("2016-03-19T19:00:00");
 
     function atualizarContador() {
       const agora = new Date();
-      const diferenca = agora - dataConhecimento;
-      const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-      const horas = agora.getHours().toString().padStart(2, '0');
-      const minutos = agora.getMinutes().toString().padStart(2, '0');
-      const segundos = agora.getSeconds().toString().padStart(2, '0');
-      document.getElementById("contador").textContent = `${dias} dias, ${horas}:${minutos}:${segundos}`;
-    }
 
-    atualizarContador();
-    setInterval(atualizarContador, 1000);
-  </script>
-</body>
-</html>
+      // Diferença total em milissegundos
+      const diferencaMs = agora - dataConhecim
