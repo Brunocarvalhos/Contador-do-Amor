@@ -18,7 +18,7 @@
     .contador {
       font-size: 1.8em;
       white-space: pre-line;
-      line-height: 1.4;
+      line-height: 1.5;
       margin-bottom: 30px;
     }
     .foto {
@@ -29,13 +29,10 @@
   </style>
 </head>
 <body>
-  <h1>Desde o dia mais especial de nossas vidas! Eu te amo Juliane!!! 💖</h1>
+  <h1>Desde o dia mais especial de nossas vidas, o dia que te conheci! Eu te amo Juliane!!! 💖</h1>
 
-  <div class="contador" id="contador">
-    Carregando...
-  </div>
+  <div class="contador" id="contador">Carregando...</div>
 
-  <!-- Sua foto: faça upload de "nos.jpg" no mesmo diretório -->
   <img src="nos.jpg" alt="Nossa foto" class="foto">
 
   <script>
@@ -43,51 +40,15 @@
 
     function atualizarContador() {
       const agora = new Date();
-      const difMs = agora - dataConhecimento;
-      const segTotais = Math.floor(difMs / 1000);
+      let totalSegundos = Math.floor((agora - dataConhecimento) / 1000);
 
-      // Anos, meses e dias (ajuste de datas)
-      let inicio = new Date(dataConhecimento);
-      let fim = new Date(agora);
-      let anos = fim.getFullYear() - inicio.getFullYear();
-      let meses = fim.getMonth() - inicio.getMonth();
-      let dias = fim.getDate() - inicio.getDate();
+      const anos = Math.floor(totalSegundos / (365.25 * 24 * 60 * 60));
+      totalSegundos -= anos * 365.25 * 24 * 60 * 60;
 
-      if (dias < 0) {
-        meses--;
-        const ultimoDiaMes = new Date(fim.getFullYear(), fim.getMonth(), 0).getDate();
-        dias += ultimoDiaMes;
-      }
-      if (meses < 0) {
-        anos--;
-        meses += 12;
-      }
+      const meses = Math.floor(totalSegundos / (30.44 * 24 * 60 * 60));
+      totalSegundos -= meses * 30.44 * 24 * 60 * 60;
 
-      // Semanas e dias totais
-      const diasTotais = Math.floor(segTotais / (60 * 60 * 24));
-      const semanas = Math.floor(diasTotais / 7);
+      const semanas = Math.floor(totalSegundos / (7 * 24 * 60 * 60));
+      totalSegundos -= semanas * 7 * 24 * 60 * 60;
 
-      // Horas, minutos e segundos restantes do dia atual
-      const horas = Math.floor((segTotais % (60 * 60 * 24)) / (60 * 60));
-      const minutos = Math.floor((segTotais % (60 * 60)) / 60);
-      const segundos = segTotais % 60;
-
-      // Formatação com zeros
-      const hStr = horas.toString().padStart(2, '0');
-      const mStr = minutos.toString().padStart(2, '0');
-      const sStr = segundos.toString().padStart(2, '0');
-
-      // Monta o texto final
-      document.getElementById("contador").textContent =
-        `${anos} anos\n` +
-        `${meses} meses\n` +
-        `${semanas} semanas\n` +
-        `${diasTotais} dias\n` +
-        `${hStr}:${mStr}:${sStr}`;
-    }
-
-    atualizarContador();
-    setInterval(atualizarContador, 1000);
-  </script>
-</body>
-</html>
+      const di
