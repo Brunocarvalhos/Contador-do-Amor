@@ -7,7 +7,7 @@
     body {
       font-family: sans-serif;
       text-align: center;
-      margin-top: 80px;
+      margin-top: 60px;
       background-color: #fde4ec;
       color: #880e4f;
     }
@@ -16,7 +16,7 @@
       margin-bottom: 20px;
     }
     .contador {
-      font-size: 1.8em;
+      font-size: 1.5em;
       white-space: pre-line;
       line-height: 1.5;
       margin-bottom: 30px;
@@ -24,31 +24,48 @@
     .foto {
       width: 300px;
       border-radius: 20px;
-      margin-bottom: 40px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <h1>Desde o dia mais especial de nossas vidas, o dia que te conheci! Eu te amo Juliane!!! 💖</h1>
-
   <div class="contador" id="contador">Carregando...</div>
-
   <img src="nos.jpg" alt="Nossa foto" class="foto">
 
   <script>
-    const dataConhecimento = new Date("2016-03-19T19:00:00");
+    const dataInicial = new Date("2016-03-19T19:00:00");
 
     function atualizarContador() {
       const agora = new Date();
-      let totalSegundos = Math.floor((agora - dataConhecimento) / 1000);
+      let diff = agora - dataInicial;
 
-      const anos = Math.floor(totalSegundos / (365.25 * 24 * 60 * 60));
-      totalSegundos -= anos * 365.25 * 24 * 60 * 60;
+      const segundosTotal = Math.floor(diff / 1000);
+      const minutosTotal = Math.floor(segundosTotal / 60);
+      const horasTotal = Math.floor(minutosTotal / 60);
+      const diasTotal = Math.floor(horasTotal / 24);
+      const semanas = Math.floor(diasTotal / 7);
+      const anos = Math.floor(diasTotal / 365.25);
+      const meses = Math.floor(diasTotal / 30.44);
 
-      const meses = Math.floor(totalSegundos / (30.44 * 24 * 60 * 60));
-      totalSegundos -= meses * 30.44 * 24 * 60 * 60;
+      const horas = horasTotal % 24;
+      const minutos = minutosTotal % 60;
+      const segundos = segundosTotal % 60;
 
-      const semanas = Math.floor(totalSegundos / (7 * 24 * 60 * 60));
-      totalSegundos -= semanas * 7 * 24 * 60 * 60;
+      const texto = `
+${anos} anos
+${meses} meses
+${semanas} semanas
+${diasTotal} dias
+${horas.toString().padStart(2, '0')} horas
+${minutos.toString().padStart(2, '0')} minutos
+${segundos.toString().padStart(2, '0')} segundos`;
 
-      const di
+      document.getElementById("contador").textContent = texto;
+    }
+
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+  </script>
+</body>
+</html>
