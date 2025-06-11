@@ -5,61 +5,62 @@
   <title>Nosso Amor</title>
   <style>
     body {
-      font-family: sans-serif;
-      text-align: center;
-      margin-top: 60px;
+      font-family: Arial, sans-serif;
       background-color: #fde4ec;
       color: #880e4f;
+      text-align: center;
+      padding: 40px;
     }
+
     h1 {
-      font-size: 2em;
+      font-size: 1.8em;
       margin-bottom: 20px;
     }
+
     .contador {
-      font-size: 1.5em;
+      font-size: 1.4em;
+      margin-top: 10px;
       white-space: pre-line;
-      line-height: 1.5;
-      margin-bottom: 30px;
     }
-    .foto {
+
+    img.foto {
       width: 300px;
       border-radius: 20px;
-      margin-top: 20px;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
   <h1>Desde o dia mais especial de nossas vidas, o dia que te conheci! Eu te amo Juliane!!! 💖</h1>
-  <div class="contador" id="contador">Carregando...</div>
-  <img src="nos.jpg" alt="Nossa foto" class="foto">
+  <div id="contador" class="contador">Carregando...</div>
+  <img src="nos.jpg" alt="Foto nossa" class="foto">
 
   <script>
-    const dataInicial = new Date("2016-03-19T19:00:00");
-
     function atualizarContador() {
+      const inicio = new Date("2016-03-19T19:00:00");
       const agora = new Date();
-      let diff = agora - dataInicial;
 
-      const segundosTotal = Math.floor(diff / 1000);
-      const minutosTotal = Math.floor(segundosTotal / 60);
-      const horasTotal = Math.floor(minutosTotal / 60);
-      const diasTotal = Math.floor(horasTotal / 24);
-      const semanas = Math.floor(diasTotal / 7);
-      const anos = Math.floor(diasTotal / 365.25);
-      const meses = Math.floor(diasTotal / 30.44);
+      let segundos = Math.floor((agora - inicio) / 1000);
 
-      const horas = horasTotal % 24;
-      const minutos = minutosTotal % 60;
-      const segundos = segundosTotal % 60;
+      const anos = Math.floor(segundos / (365.25 * 24 * 3600));
+      segundos %= Math.floor(365.25 * 24 * 3600);
 
-      const texto = `
-${anos} anos
-${meses} meses
-${semanas} semanas
-${diasTotal} dias
-${horas.toString().padStart(2, '0')} horas
-${minutos.toString().padStart(2, '0')} minutos
-${segundos.toString().padStart(2, '0')} segundos`;
+      const meses = Math.floor(segundos / (30.44 * 24 * 3600));
+      segundos %= Math.floor(30.44 * 24 * 3600);
+
+      const semanas = Math.floor(segundos / (7 * 24 * 3600));
+      segundos %= 7 * 24 * 3600;
+
+      const dias = Math.floor(segundos / (24 * 3600));
+      segundos %= 24 * 3600;
+
+      const horas = Math.floor(segundos / 3600);
+      segundos %= 3600;
+
+      const minutos = Math.floor(segundos / 60);
+      segundos %= 60;
+
+      const texto = `${anos} anos\n${meses} meses\n${semanas} semanas\n${dias} dias\n${horas.toString().padStart(2, '0')} horas\n${minutos.toString().padStart(2, '0')} minutos\n${segundos.toString().padStart(2, '0')} segundos`;
 
       document.getElementById("contador").textContent = texto;
     }
